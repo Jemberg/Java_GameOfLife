@@ -33,9 +33,6 @@ public class App extends Application {
         Grid grid = new Grid(20,20);
         Random random = new Random(2000);
 
-
-
-
         grid.randomGeneration(random);
         //grid.saveAsJson("C:\\testfolder\\yes.json");
         //grid.loadJson("C:\\testfolder\\yes.json");
