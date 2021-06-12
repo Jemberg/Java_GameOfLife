@@ -175,12 +175,15 @@ public class Grid {
         }
 
         JSONObject json =(JSONObject) new JSONTokener(data).nextValue();
-        boolean[][] newCells = new boolean[rows][columns];
 
         try {
             rows = json.getInt("grid_rows");
+            System.out.println(rows);
             columns = json.getInt("grid_columns");
+            System.out.println(columns);
             iteration = json.getInt("iteration");
+            System.out.println(iteration);
+            boolean[][] newCells = new boolean[rows][columns];
 
 
             JSONArray importCells = json.getJSONArray("cells");
