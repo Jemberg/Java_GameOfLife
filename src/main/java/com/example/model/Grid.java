@@ -1,9 +1,14 @@
 package com.example.model;
 
+import org.json.*;
 
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Grid {
     private int iteration;
@@ -139,13 +144,57 @@ public class Grid {
 
     }
 
-//    public void saveAsJson(String filePath){
-//        JSONObject json = new JSONObject();
-//        json.put("grid_rows", rows);
-//        json.put("grid_columns", columns);
-//        json.put("iteration", iteration);
-//        json.put()
-//    }
+    public void saveAsJson(String filePath){
+        JSONObject json = new JSONObject();
+        json.put("grid_rows", rows);
+        json.put("grid_columns", columns);
+        json.put("iteration", iteration);
+        json.put("cells", cells);
+        try{
+            FileWriter file =new FileWriter(filePath);
+            file.write(json.toString());
+            file.flush();
+            file.close();
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void loadJson(String filePath){
+        String data = "";
+        try {
+            File file = new File(filePath);
+            Scanner myReader = new Scanner(file);
+            while (myReader.hasNextLine()) {
+                data += myReader.nextLine();
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("file with that path not found");
+            e.printStackTrace();
+        }
+
+        JSONObject json =(JSONObject) new JSONTokener(data).nextValue();
+        boolean[][] newCells = new boolean[rows][columns];
+
+        try {
+            rows = json.getInt("grid_rows");
+            columns = json.getInt("grid_columns");
+            iteration = json.getInt("iteration");
+
+
+            JSONArray importCells = json.getJSONArray("cells");
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    newCells[i][j] = importCells.getJSONArray(i).getBoolean(j);
+                }
+            }
+            cells = newCells;
+        } catch (Exception e){
+            System.out.println("Invalid json data");
+            e.printStackTrace();
+        }
+    }
 
 
 
