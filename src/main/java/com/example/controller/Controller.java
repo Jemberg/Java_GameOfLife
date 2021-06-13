@@ -10,6 +10,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import javafx.concurrent.Task;
@@ -44,14 +45,13 @@ public class Controller {
     private void restartGrid(int seed) {
         iterationButton.setText("Iteration: 0");
         Grid grid = new Grid(Options.getSize(), Options.getSize());
-        Random random = new Random(seed); // Just an initialization value.
+        Random random = new Random(seed);
         grid.randomGeneration(random);
         Options.setGrid(grid);
         setCells(grid);
     }
 
     private void setCells(Grid grid) {
-        // TODO: If have time, add clicking in new cells into the grid.
         boolean[][] cells = grid.getCells();
         for (int i = 0; i < Options.getSize(); i++) {
             for (int j = 0; j < Options.getSize(); j++) {
@@ -80,7 +80,7 @@ public class Controller {
 
     private void advanceGame() {
         gridPane.getChildren().clear();
-        Grid grid = Options.getGrid(); // This was written at almost 4 AM, no judge pls.
+        Grid grid = Options.getGrid();
         grid.nextIteration();
         iterationButton.setText("Iteration: " + grid.getIteration());
         setCells(grid);
@@ -135,7 +135,7 @@ public class Controller {
         playPauseButton.setSelected(false); // Makes sure that game is not running anymore by deselecting the play button.
         timeline.stop();
         gridPane.getChildren().clear();
-        if (sizeOptions.getValue().equals("Small")) { // TODO: Set default value for buttons
+        if (sizeOptions.getValue().equals("Small")) {
             Options.setSize(25);
             restartGrid(getSeed()); // Stops the grid and generates a new one according to the size.
         } else if (sizeOptions.getValue().equals("Medium")) {
@@ -149,11 +149,11 @@ public class Controller {
 
     @FXML
     private void onGenerateButton() {
-        playPauseButton.setSelected(false); // TODO: Optimize code by removing these lines and putting them in a function.
+        playPauseButton.setSelected(false); 
         timeline.stop();
         iterationButton.setText("Iteration: 0");
         Grid grid = new Grid(Options.getSize(), Options.getSize());
-        Random random = new Random(getSeed()); // TODO: Remove this after testing.
+        Random random = new Random(getSeed());
         grid.randomGeneration(random);
         Options.setGrid(grid);
         setCells(grid);
@@ -162,29 +162,38 @@ public class Controller {
     @FXML
     private void onClearButton() {
         Options.setGrid(new Grid(Options.getSize(), Options.getSize()));
-        playPauseButton.setSelected(false); // TODO: Optimize code by removing these lines and putting them in a function.
+        playPauseButton.setSelected(false);
         timeline.stop();
         iterationButton.setText("Iteration: 0");
         setCells(Options.getGrid());
     }
 
     @FXML
-    private void onImportButton(ActionEvent event) {
+    private void onImportButton(ActionEvent event) throws Exception {
         FileChooser chooser = new FileChooser();
-        chooser.setTitle("Save file");
+        chooser.setTitle("Load file");
         File file = chooser.showOpenDialog(new Stage());
+        if (file == null) {
+            return;
+        }
         Options.getGrid().loadJson(file.getAbsolutePath());
-        System.out.println(file.getAbsolutePath());
         gridPane.getChildren().clear();
         Options.setSize(Options.getGrid().getColumns());
         setCells(Options.getGrid());
-        // TODO: Check if no file is selected.
-        // TODO: Possibly gonna have to make new grid to reset iteration number.
     }
     
     @FXML
     private void onExportButton() {
-        // TODO: Check if no file is selected.
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Save file");
+        chooser.setInitialFileName("Amogus");
+        chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JSON File", "*.json"));
+        File file = chooser.showSaveDialog(new Stage());
+        if (file == null) {
+            return;
+        }
+        Options.getGrid().saveAsJson(file.getAbsolutePath());
+        System.out.println(file.getAbsolutePath());
     }
 
 }
