@@ -40,14 +40,6 @@ public class Controller {
 
     Timeline timeline;
 
-    @FXML
-    private void initialize() { // At the start shows a random canvas layout.
-        restartGrid(Options.getDefaultSeed());
-        sizeOptions.getItems().addAll("Small", "Medium", "Large");
-        sizeOptions.setValue("Medium");
-        timeline = new Timeline(new KeyFrame(Duration.millis(Options.getTickPeriod()), e -> advanceGame()));
-    }
-
     private void restartGrid(int seed) {
         iterationButton.setText("Iteration: 0");
         Grid grid = new Grid(Options.getSize(), Options.getSize());
@@ -83,6 +75,24 @@ public class Controller {
         Options.setGrid(grid);
     }
 
+    private int getSeed() {
+        if (seedField.getText().trim().isEmpty()) {
+            return Options.getDefaultSeed();
+        } else {
+            int seed = Integer.parseInt(seedField.getText().trim());
+            return seed;  
+        }
+
+    }
+
+    @FXML
+    private void initialize() { // At the start shows a random canvas layout.
+        restartGrid(getSeed());
+        sizeOptions.getItems().addAll("Small", "Medium", "Large");
+        sizeOptions.setValue("Medium");
+        timeline = new Timeline(new KeyFrame(Duration.millis(Options.getTickPeriod()), e -> advanceGame()));
+    }
+
     @FXML
     private void onPlayPauseButton() {
         setCells(Options.getGrid());
@@ -116,13 +126,13 @@ public class Controller {
         gridPane.getChildren().clear();
         if (sizeOptions.getValue().equals("Small")) { // TODO: Set default value for buttons
             Options.setSize(25);
-            restartGrid(Options.getDefaultSeed()); // Stops the grid and generates a new one according to the size.
+            restartGrid(getSeed()); // Stops the grid and generates a new one according to the size.
         } else if (sizeOptions.getValue().equals("Medium")) {
             Options.setSize(50);
-            restartGrid(Options.getDefaultSeed());
+            restartGrid(getSeed());
         } else if (sizeOptions.getValue().equals("Large")) {
             Options.setSize(75);
-            restartGrid(Options.getDefaultSeed());
+            restartGrid(getSeed());
         }
     }
 
@@ -132,7 +142,7 @@ public class Controller {
         timeline.stop();
         iterationButton.setText("Iteration: 0");
         Grid grid = new Grid(Options.getSize(), Options.getSize());
-        Random random = new Random(69); // TODO: Remove this after testing.
+        Random random = new Random(getSeed()); // TODO: Remove this after testing.
         grid.randomGeneration(random);
         Options.setGrid(grid);
         setCells(grid);
