@@ -1,9 +1,5 @@
 package com.example.model;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
-
 public class Options {
     static int tickPeriod = 200; // Default tick period (period between ticks/frames)
     static int size = 50; // Default size set to medium.
