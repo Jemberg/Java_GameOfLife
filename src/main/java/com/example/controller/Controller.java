@@ -43,7 +43,7 @@ public class Controller {
     @FXML
     private void initialize() { // At the start shows a random canvas layout.
         restartGrid();
-        iterationButton.setText("iteration: 0");
+        iterationButton.setText("Iteration: 0");
         sizeOptions.getItems().addAll("Small", "Medium", "Large");
         timeline = new Timeline(new KeyFrame(Duration.millis(Options.getTickPeriod()), e -> advanceGame()));
     }
@@ -69,9 +69,7 @@ public class Controller {
         for (int i = 0; i < grid.getColumns(); i++) {
             for (int j = 0; j < grid.getRows(); j++) {
                 Pane pane = new Pane(); // TODO: setPrefSize based on amount of cells in the grid.
-                pane.setPrefSize(10, 10); // Sets size of each cell. https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/Pane.html
-                gridPane.setFillHeight(pane, cells[i][j]);
-                gridPane.setFillWidth(pane, cells[i][j]);
+                pane.setPrefSize(100, 100); // Sets size of each cell. https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/Pane.html
                 gridPane.add(pane, i, j);
                 if (cells[i][j] == true) {
                     pane.setStyle("-fx-background-color: #800080"); // Purple to see if it works.
@@ -86,7 +84,7 @@ public class Controller {
         gridPane.getChildren().clear();
         Grid grid = Options.getGrid(); // This was written at almost 4 AM, no judge pls.
         grid.nextIteration();
-        iterationButton.setText("iteration: " + grid.getIteration());
+        iterationButton.setText("Iteration: " + grid.getIteration());
         setCells(grid);
         Options.setGrid(grid);
     }
@@ -122,6 +120,7 @@ public class Controller {
     @FXML
     private void onSizeOption() {
         playPauseButton.setSelected(false); // Makes sure that game is not running anymore by deselecting the play button.
+        gridPane.getChildren().clear();
         if (sizeOptions.getValue().equals("Small")) { // TODO: Set default value for buttons
             Options.setSize(25);
             restartGrid(); // Stops the grid and generates a new one according to the size.

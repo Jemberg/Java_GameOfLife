@@ -15,9 +15,9 @@
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.Controller">
    <children>
-      <HBox alignment="CENTER_LEFT" layoutX="-3.0" prefHeight="720.0" prefWidth="1113.0">
+      <HBox alignment="CENTER_LEFT" layoutX="-1.0" layoutY="-7.0" prefHeight="733.0" prefWidth="958.0">
          <children>
-            <VBox prefHeight="426.0" prefWidth="128.0">
+            <VBox prefHeight="426.0" prefWidth="123.0">
                <children>
                   <VBox alignment="CENTER" prefHeight="237.0" prefWidth="134.0">
                      <children>
@@ -104,7 +104,7 @@
                      </children></VBox>
                </children>
             </VBox>
-            <GridPane fx:id="gridPane" alignment="CENTER_LEFT" hgap="1.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="720.0" prefWidth="850.0" vgap="1.0" />
+            <GridPane fx:id="gridPane" alignment="CENTER_LEFT" hgap="1.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="714.0" prefWidth="827.0" vgap="1.0" />
          </children>
       </HBox>
    </children>
