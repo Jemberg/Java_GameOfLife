@@ -42,23 +42,16 @@ public class Controller {
 
     @FXML
     private void initialize() { // At the start shows a random canvas layout.
-        restartGrid();
-        iterationButton.setText("Iteration: 0");
+        restartGrid(Options.getDefaultSeed());
         sizeOptions.getItems().addAll("Small", "Medium", "Large");
         sizeOptions.setValue("Medium");
         timeline = new Timeline(new KeyFrame(Duration.millis(Options.getTickPeriod()), e -> advanceGame()));
     }
 
-    // TODO: Add these elements here and get rid of options class.
-    //private Grid grid = new Grid(rows, columns);
-    //private int size;
-    //private int speed;
-
-
-
-    private void restartGrid() {
+    private void restartGrid(int seed) {
+        iterationButton.setText("Iteration: 0");
         Grid grid = new Grid(Options.getSize(), Options.getSize());
-        Random random = new Random(10); // Just an initialization value.
+        Random random = new Random(seed); // Just an initialization value.
         grid.randomGeneration(random);
         Options.setGrid(grid);
         setCells(grid);
@@ -90,8 +83,6 @@ public class Controller {
         Options.setGrid(grid);
     }
 
-    // TODO: Add a label that displays current iteration.
-
     @FXML
     private void onPlayPauseButton() {
         setCells(Options.getGrid());
@@ -121,38 +112,42 @@ public class Controller {
     @FXML
     private void onSizeOption() {
         playPauseButton.setSelected(false); // Makes sure that game is not running anymore by deselecting the play button.
+        timeline.stop();
         gridPane.getChildren().clear();
         if (sizeOptions.getValue().equals("Small")) { // TODO: Set default value for buttons
             Options.setSize(25);
-            restartGrid(); // Stops the grid and generates a new one according to the size.
+            restartGrid(Options.getDefaultSeed()); // Stops the grid and generates a new one according to the size.
         } else if (sizeOptions.getValue().equals("Medium")) {
             Options.setSize(50);
-            restartGrid();
+            restartGrid(Options.getDefaultSeed());
         } else if (sizeOptions.getValue().equals("Large")) {
             Options.setSize(75);
-            restartGrid();
+            restartGrid(Options.getDefaultSeed());
         }
     }
 
     @FXML
     private void onGenerateButton() {
-        Grid grid = Options.getGrid();
+        playPauseButton.setSelected(false);
+        timeline.stop();
+        iterationButton.setText("Iteration: 0");
+        Grid grid = new Grid(Options.getSize(), Options.getSize());
         Random random = new Random(69); // TODO: Remove this after testing.
         grid.randomGeneration(random);
+        Options.setGrid(grid);
         setCells(grid);
     }
 
     @FXML
     private void onClearButton() {
-        // TODO: Make clear button also stop current game of life instance.
+        Options.setGrid(new Grid(Options.getSize(), Options.getSize()));
         playPauseButton.setSelected(false);
-        restartGrid();
+        timeline.stop();
+        iterationButton.setText("Iteration: 0");
         for (int i = 0; i < Options.getSize(); i++) {
             for (int j = 0; j < Options.getSize(); j++) {
                 Pane pane = new Pane();
                     pane.setPrefSize(10, 10); // Sets size of each cell. https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/Pane.html
-                    gridPane.setFillHeight(pane, true);
-                    gridPane.setFillWidth(pane, true);
                     gridPane.add(pane, i, j);
                     pane.setStyle("-fx-background-color: #000000"); // Purple to see if it works.
             }
