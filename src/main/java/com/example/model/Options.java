@@ -1,17 +1,21 @@
 package com.example.model;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+
 public class Options {
-    static int speed = 100; // Default speed set to medium.
+    static int tickPeriod = 200; // Default tick period (period between ticks/frames)
     static int size = 75; // Default size set to medium.
     static Grid grid;
 
-    public static int getSpeed() {
-        return speed;
+    public static int getTickPeriod() {
+        return tickPeriod;
     }
 
-    public static void setSpeed(int i) {
-        Options.speed = i;
-    }
+    public static void setTickPeriod(int i) {
+        Options.tickPeriod = i;
+    }   // not used in this version
 
     public static int getSize() {
         return size;

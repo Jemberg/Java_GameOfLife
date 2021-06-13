@@ -45,7 +45,7 @@ public class Controller {
         restartGrid();
         iterationButton.setText("iteration: 0");
         sizeOptions.getItems().addAll("Small", "Medium", "Large");
-        timeline = new Timeline(new KeyFrame(Duration.millis(Options.getSpeed()), e -> advanceGame()));
+        timeline = new Timeline(new KeyFrame(Duration.millis(Options.getTickPeriod()), e -> advanceGame()));
     }
 
     // TODO: Add these elements here and get rid of options class.
@@ -96,7 +96,6 @@ public class Controller {
     @FXML
     private void onPlayPauseButton() {
         setCells(Options.getGrid());
-        Grid grid = Options.getGrid();
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.playFromStart();
 
@@ -107,17 +106,17 @@ public class Controller {
 
     @FXML
     private void onSlow() {
-        Options.setSpeed(4);
+        timeline.setRate(1);
     }
 
     @FXML
     private void onMedium() {
-        Options.setSpeed(2);
+        timeline.setRate(2);
     }
 
     @FXML
-    private void onFast() {
-        Options.setSpeed(1);
+    private void onFast() { ;
+        timeline.setRate(4);
     }
 
     @FXML

@@ -21,6 +21,7 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="237.0" prefWidth="134.0">
                      <children>
+                        <Label fx:id="iterationButton" text="Iteration: " />
                         <ToggleButton fx:id="playPauseButton" mnemonicParsing="false" onAction="#onPlayPauseButton" text="Play/Pause">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
