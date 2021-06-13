@@ -42,10 +42,16 @@ public class Controller {
     @FXML private GridPane gridPane; // Actual gridPane where the game is displayed.
 
     @FXML
-    private void initialize() { // At the start shows a blank canvas.
+    private void initialize() { // At the start shows a random canvas layout.
         restartGrid();
         sizeOptions.getItems().addAll("Small", "Medium", "Large");
     }
+
+    // TODO: Add these elements here and get rid of options class.
+    //private Grid grid = new Grid(rows, columns);
+    //private int size;
+    //private int speed;
+    //private Timeline timeline
 
     private void restartGrid() {
         Grid grid = new Grid(Options.getSize(), Options.getSize());
@@ -56,10 +62,11 @@ public class Controller {
     }
 
     private void setCells(Grid grid) {
+        // TODO: If have time, add clicking in new cells into the grid.
         boolean[][] cells = grid.getCells();
         for (int i = 0; i < grid.getColumns(); i++) {
             for (int j = 0; j < grid.getRows(); j++) {
-                Pane pane = new Pane();
+                Pane pane = new Pane(); // TODO: setPrefSize based on amount of cells in the grid.
                 pane.setPrefSize(10, 10); // Sets size of each cell. https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/Pane.html
                 gridPane.setFillHeight(pane, cells[i][j]);
                 gridPane.setFillWidth(pane, cells[i][j]);
@@ -81,12 +88,14 @@ public class Controller {
         Options.setGrid(grid);
     }
 
+    // TODO: Add a label that displays current iteration.
+
     @FXML
     private void onPlayPauseButton() throws InterruptedException {
         setCells(Options.getGrid());
         Grid grid = Options.getGrid();
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(Options.getSpeed()), e -> advanceGame())); // TODO: Speed probably needed in miliseconds instead, game feels too slow.
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(Options.getSpeed()), e -> advanceGame())); // TODO: Speed probably needed in miliseconds instead, game feels too slow.
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.playFromStart();
 
@@ -113,7 +122,7 @@ public class Controller {
     @FXML
     private void onSizeOption() {
         playPauseButton.setSelected(false); // Makes sure that game is not running anymore by deselecting the play button.
-        if (sizeOptions.getValue().equals("Small")) {
+        if (sizeOptions.getValue().equals("Small")) { // TODO: Set default value for buttons
             Options.setSize(25);
             restartGrid(); // Stops the grid and generates a new one according to the size.
         } else if (sizeOptions.getValue().equals("Medium")) {

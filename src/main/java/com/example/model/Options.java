@@ -1,8 +1,8 @@
 package com.example.model;
 
 public class Options {
-    static int speed = 1; // Default speed set to medium.
-    static int size = 30; // Default size set to medium.
+    static int speed = 100; // Default speed set to medium.
+    static int size = 75; // Default size set to medium.
     static Grid grid;
 
     public static int getSpeed() {

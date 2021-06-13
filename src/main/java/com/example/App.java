@@ -26,26 +26,11 @@ public class App extends Application {
         Parent gameRoot = gameLoader.load();
         stage.setScene(new Scene(gameRoot));
         stage.show();
+        // TODO: Set background color
+        // TODO: Set program title.
     }
 
     public static void main(String[] args) {
         launch();
-
-        // Grid grid = new Grid(20,20);
-        // Random random = new Random(2000);
-
-        // grid.randomGeneration(random);
-        //grid.saveAsJson("C:\\testfolder\\yes.json");
-        //grid.loadJson("C:\\testfolder\\yes.json");
-
-        // while(true){
-        //     try {
-        //         Thread.sleep(2000);
-        //         grid.nextIteration();
-        //         System.out.println(grid);
-        //     }catch (Exception e){
-        //         System.out.println(e);
-        //     }
-        // }
     }
 }
