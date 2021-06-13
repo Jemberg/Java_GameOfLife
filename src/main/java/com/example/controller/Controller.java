@@ -9,17 +9,13 @@ import com.example.model.Options;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.control.*;
 import javafx.util.Duration;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -40,12 +36,14 @@ public class Controller {
     @FXML private Button importButton; // Import or export via JSON file the current gridPane.
     @FXML private Button exportButton;
     @FXML private GridPane gridPane; // Actual gridPane where the game is displayed.
+    @FXML private Label iterationButton;
 
-    Timeline timeline;//TODO
+    Timeline timeline;
 
     @FXML
     private void initialize() { // At the start shows a random canvas layout.
         restartGrid();
+        iterationButton.setText("iteration: 0");
         sizeOptions.getItems().addAll("Small", "Medium", "Large");
         timeline = new Timeline(new KeyFrame(Duration.millis(Options.getSpeed()), e -> advanceGame()));
     }
@@ -88,6 +86,7 @@ public class Controller {
         gridPane.getChildren().clear();
         Grid grid = Options.getGrid(); // This was written at almost 4 AM, no judge pls.
         grid.nextIteration();
+        iterationButton.setText("iteration: " + grid.getIteration());
         setCells(grid);
         Options.setGrid(grid);
     }
@@ -95,13 +94,13 @@ public class Controller {
     // TODO: Add a label that displays current iteration.
 
     @FXML
-    private void onPlayPauseButton() throws InterruptedException {
+    private void onPlayPauseButton() {
         setCells(Options.getGrid());
         Grid grid = Options.getGrid();
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.playFromStart();
 
-        if (!playPauseButton.isSelected()) { // TODO: Make proper way to pause game, this does not work.
+        if (!playPauseButton.isSelected()) {
             timeline.stop();
         }
     }
