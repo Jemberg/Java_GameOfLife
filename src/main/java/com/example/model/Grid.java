@@ -174,10 +174,12 @@ public class Grid {
             e.printStackTrace();
         }
 
-        JSONObject json =(JSONObject) new JSONTokener(data).nextValue();
-        boolean[][] newCells = new boolean[rows][columns];
+        // JSONObject json =(JSONObject) new JSONTokener(data).nextValue();
+        // boolean[][] newCells = new boolean[rows][columns];
 
         try {
+            JSONObject json =(JSONObject) new JSONTokener(data).nextValue();
+            boolean[][] newCells = new boolean[rows][columns];
             rows = json.getInt("grid_rows");
             columns = json.getInt("grid_columns");
             iteration = json.getInt("iteration");

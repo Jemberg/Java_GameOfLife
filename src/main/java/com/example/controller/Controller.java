@@ -10,6 +10,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -52,10 +53,22 @@ public class Controller {
     private void setCells(Grid grid) {
         // TODO: If have time, add clicking in new cells into the grid.
         boolean[][] cells = grid.getCells();
-        for (int i = 0; i < grid.getColumns(); i++) {
-            for (int j = 0; j < grid.getRows(); j++) {
+        for (int i = 0; i < Options.getSize(); i++) {
+            for (int j = 0; j < Options.getSize(); j++) {
                 Pane pane = new Pane();
                 pane.setPrefSize(100, 100); // Sets size of each cell. https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/Pane.html
+                int iValue = i;
+                int jValue = j;
+                EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
+                    @Override 
+                    public void handle(MouseEvent e) { 
+                       System.out.println("Button clicked."); 
+                       Options.getGrid().toggleCellStatus(iValue, jValue);
+                       setCells(grid);
+                    } 
+                 };
+                pane.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+
                 gridPane.add(pane, i, j);
                 if (cells[i][j] == true) {
                     pane.setStyle("-fx-background-color: #800080"); // Purple to see if it works.
@@ -82,8 +95,15 @@ public class Controller {
             int seed = Integer.parseInt(seedField.getText().trim());
             return seed;  
         }
-
     }
+
+    // @FXML
+    // private void mouseEntered(MouseEvent e) {
+    //     Node source = (Node)e.getSource() ;
+    //     Integer colIndex = GridPane.getColumnIndex(source);
+    //     Integer rowIndex = GridPane.getRowIndex(source);
+    //     System.out.printf("Mouse entered cell [%d, %d]%n", colIndex.intValue(), rowIndex.intValue());
+    // }
 
     @FXML
     private void initialize() { // At the start shows a random canvas layout.
@@ -138,7 +158,7 @@ public class Controller {
 
     @FXML
     private void onGenerateButton() {
-        playPauseButton.setSelected(false);
+        playPauseButton.setSelected(false); // TODO: Optimize code by removing these lines and putting them in a function.
         timeline.stop();
         iterationButton.setText("Iteration: 0");
         Grid grid = new Grid(Options.getSize(), Options.getSize());
@@ -151,7 +171,7 @@ public class Controller {
     @FXML
     private void onClearButton() {
         Options.setGrid(new Grid(Options.getSize(), Options.getSize()));
-        playPauseButton.setSelected(false);
+        playPauseButton.setSelected(false); // TODO: Optimize code by removing these lines and putting them in a function.
         timeline.stop();
         iterationButton.setText("Iteration: 0");
         for (int i = 0; i < Options.getSize(); i++) {
@@ -166,21 +186,30 @@ public class Controller {
 
     @FXML
     private void onImportButton(ActionEvent event) {
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Open File");
-        File file = chooser.showOpenDialog(new Stage());
-        System.out.println(file.getAbsolutePath());
-        // TODO: Check if correct JSON format.
-        // TODO: Actually figure out how to import properly cause this is not working out ;-;
-        // Options.setGrid(Options.getGrid().loadJson(file.getAbsolutePath())); // Idk even.
+        Menu file = new Menu("File");
+        MenuItem item = new MenuItem("Save");
+        file.getItems().addAll(item);
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save");
+        
+        item.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+               //Opening a dialog box
+               //fileChooser.showSaveDialog();
+            }
+         });
+
+        // TODO: Possibly gonna have to make new grid to reset iteration number.
+        //System.out.println(file.getAbsolutePath());
+        //Options.getGrid().loadJson(file.getAbsolutePath());
     }
     
     @FXML
-    private void onExportButton() { // TODO: Use file explorer here to save as JSON.
+    private void onExportButton() {
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Save file");
         File file = chooser.showOpenDialog(new Stage());
-        // System.out.println(file.getAbsolutePath());
         Options.getGrid().saveAsJson(file.getAbsolutePath());
     }
 
