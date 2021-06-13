@@ -57,7 +57,7 @@ public class Controller {
             for (int j = 0; j < Options.getSize(); j++) {
                 Pane pane = new Pane();
                 pane.setPrefSize(100, 100); // Sets size of each cell. https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/Pane.html
-                int iValue = i;
+                int iValue = i; // This wouldn't work otherwise, no clue.
                 int jValue = j;
                 EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
                     @Override 
@@ -170,31 +170,21 @@ public class Controller {
 
     @FXML
     private void onImportButton(ActionEvent event) {
-        Menu file = new Menu("File");
-        MenuItem item = new MenuItem("Save");
-        file.getItems().addAll(item);
-
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save");
-        
-        item.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-               //Opening a dialog box
-               //fileChooser.showSaveDialog();
-            }
-         });
-
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Save file");
+        File file = chooser.showOpenDialog(new Stage());
+        Options.getGrid().loadJson(file.getAbsolutePath());
+        System.out.println(file.getAbsolutePath());
+        gridPane.getChildren().clear();
+        Options.setSize(Options.getGrid().getColumns());
+        setCells(Options.getGrid());
+        // TODO: Check if no file is selected.
         // TODO: Possibly gonna have to make new grid to reset iteration number.
-        //System.out.println(file.getAbsolutePath());
-        //Options.getGrid().loadJson(file.getAbsolutePath());
     }
     
     @FXML
     private void onExportButton() {
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Save file");
-        File file = chooser.showOpenDialog(new Stage());
-        Options.getGrid().saveAsJson(file.getAbsolutePath());
+        // TODO: Check if no file is selected.
     }
 
 }
