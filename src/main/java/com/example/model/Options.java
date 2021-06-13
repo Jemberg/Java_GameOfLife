@@ -6,7 +6,7 @@ import javafx.util.Duration;
 
 public class Options {
     static int tickPeriod = 200; // Default tick period (period between ticks/frames)
-    static int size = 75; // Default size set to medium.
+    static int size = 50; // Default size set to medium.
     static Grid grid;
 
     public static int getTickPeriod() {

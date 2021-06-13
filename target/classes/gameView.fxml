@@ -104,7 +104,7 @@
                      </children></VBox>
                </children>
             </VBox>
-            <GridPane fx:id="gridPane" alignment="CENTER_LEFT" hgap="1.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="714.0" prefWidth="827.0" vgap="1.0" />
+            <GridPane fx:id="gridPane" alignment="CENTER_LEFT" hgap="1.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="714.0" prefWidth="825.0" vgap="1.0" />
          </children>
       </HBox>
    </children>

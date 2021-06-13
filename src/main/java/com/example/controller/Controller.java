@@ -45,6 +45,7 @@ public class Controller {
         restartGrid();
         iterationButton.setText("Iteration: 0");
         sizeOptions.getItems().addAll("Small", "Medium", "Large");
+        sizeOptions.setValue("Medium");
         timeline = new Timeline(new KeyFrame(Duration.millis(Options.getTickPeriod()), e -> advanceGame()));
     }
 
@@ -68,7 +69,7 @@ public class Controller {
         boolean[][] cells = grid.getCells();
         for (int i = 0; i < grid.getColumns(); i++) {
             for (int j = 0; j < grid.getRows(); j++) {
-                Pane pane = new Pane(); // TODO: setPrefSize based on amount of cells in the grid.
+                Pane pane = new Pane();
                 pane.setPrefSize(100, 100); // Sets size of each cell. https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/Pane.html
                 gridPane.add(pane, i, j);
                 if (cells[i][j] == true) {
