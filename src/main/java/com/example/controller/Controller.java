@@ -41,17 +41,21 @@ public class Controller {
     @FXML private Button exportButton;
     @FXML private GridPane gridPane; // Actual gridPane where the game is displayed.
 
+    Timeline timeline;//TODO
+
     @FXML
     private void initialize() { // At the start shows a random canvas layout.
         restartGrid();
         sizeOptions.getItems().addAll("Small", "Medium", "Large");
+        timeline = new Timeline(new KeyFrame(Duration.millis(Options.getSpeed()), e -> advanceGame()));
     }
 
     // TODO: Add these elements here and get rid of options class.
     //private Grid grid = new Grid(rows, columns);
     //private int size;
     //private int speed;
-    //private Timeline timeline
+
+
 
     private void restartGrid() {
         Grid grid = new Grid(Options.getSize(), Options.getSize());
@@ -94,8 +98,6 @@ public class Controller {
     private void onPlayPauseButton() throws InterruptedException {
         setCells(Options.getGrid());
         Grid grid = Options.getGrid();
-
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(Options.getSpeed()), e -> advanceGame())); // TODO: Speed probably needed in miliseconds instead, game feels too slow.
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.playFromStart();
 
