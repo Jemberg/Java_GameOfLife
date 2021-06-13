@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -25,9 +26,10 @@ public class App extends Application {
         FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/gameView.fxml"));
         Parent gameRoot = gameLoader.load();
         stage.setScene(new Scene(gameRoot));
+        stage.setTitle("Game of Life");
         stage.show();
-        // TODO: Set background color
-        // TODO: Set program title.
+        Image applicationIcon = new Image(getClass().getResourceAsStream("/logo.png"));
+        stage.getIcons().add(applicationIcon);
     }
 
     public static void main(String[] args) {

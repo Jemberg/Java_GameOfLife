@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.Controller">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="950.0" style="-fx-background-color: #101010;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.Controller">
    <children>
       <HBox alignment="CENTER_LEFT" layoutX="-1.0" layoutY="-7.0" prefHeight="733.0" prefWidth="958.0">
          <children>
@@ -21,18 +21,18 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="237.0" prefWidth="134.0">
                      <children>
-                        <Label fx:id="iterationButton" text="Iteration: " />
+                        <Label fx:id="iterationButton" style="-fx-text-fill: white;" text="Iteration: " />
                         <ToggleButton fx:id="playPauseButton" mnemonicParsing="false" onAction="#onPlayPauseButton" text="Play/Pause">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </ToggleButton>
-                        <Label text="Speed:">
+                        <Label style="-fx-text-fill: white;" text="Speed:">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </Label>
-                        <RadioButton fx:id="slow" mnemonicParsing="false" onAction="#onSlow" text="Slow">
+                        <RadioButton fx:id="slow" mnemonicParsing="false" onAction="#onSlow" style="-fx-text-fill: white;" text="Slow">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -40,12 +40,12 @@
                               <ToggleGroup fx:id="speedToggleGroup" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="medium" mnemonicParsing="false" onAction="#onMedium" selected="true" text="Medium" toggleGroup="$speedToggleGroup">
+                        <RadioButton fx:id="medium" mnemonicParsing="false" onAction="#onMedium" selected="true" style="-fx-text-fill: white;" text="Medium" toggleGroup="$speedToggleGroup">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </RadioButton>
-                        <RadioButton fx:id="fast" mnemonicParsing="false" onAction="#onFast" text="Fast" toggleGroup="$speedToggleGroup">
+                        <RadioButton fx:id="fast" mnemonicParsing="false" onAction="#onFast" style="-fx-text-fill: white;" text="Fast" toggleGroup="$speedToggleGroup">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -54,7 +54,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="242.0" prefWidth="117.0">
                      <children>
-                        <Label text="Size:">
+                        <Label style="-fx-text-fill: white;" text="Size:">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -67,7 +67,7 @@
                               <Insets left="5.0" right="5.0" />
                            </padding>
                         </ComboBox>
-                        <Label text="Seed:">
+                        <Label style="-fx-text-fill: white;" text="Seed:">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>

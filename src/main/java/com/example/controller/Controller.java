@@ -70,7 +70,7 @@ public class Controller {
 
                 gridPane.add(pane, i, j);
                 if (cells[i][j] == true) {
-                    pane.setStyle("-fx-background-color: #800080"); // Purple to see if it works.
+                    pane.setStyle("-fx-background-color: #FFA500");
                 } else {
                     pane.setStyle("-fx-background-color: #000000");
                 }
