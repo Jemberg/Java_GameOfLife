@@ -48,7 +48,7 @@ public class Grid {
     }
 
     public void toggleCellStatus(int row, int column){
-        if(row<=0 || column<=0){
+        if(row<0 || column<0){
             throw new RuntimeException("neither rows nor columns can be negative numbers");
         } else if(row>=rows || column>=columns){
             throw new RuntimeException("index out of range");

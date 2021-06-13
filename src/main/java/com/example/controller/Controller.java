@@ -62,7 +62,6 @@ public class Controller {
                 EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
                     @Override 
                     public void handle(MouseEvent e) { 
-                       System.out.println("Button clicked."); 
                        Options.getGrid().toggleCellStatus(iValue, jValue);
                        setCells(grid);
                     } 
@@ -96,14 +95,6 @@ public class Controller {
             return seed;  
         }
     }
-
-    // @FXML
-    // private void mouseEntered(MouseEvent e) {
-    //     Node source = (Node)e.getSource() ;
-    //     Integer colIndex = GridPane.getColumnIndex(source);
-    //     Integer rowIndex = GridPane.getRowIndex(source);
-    //     System.out.printf("Mouse entered cell [%d, %d]%n", colIndex.intValue(), rowIndex.intValue());
-    // }
 
     @FXML
     private void initialize() { // At the start shows a random canvas layout.
@@ -174,14 +165,7 @@ public class Controller {
         playPauseButton.setSelected(false); // TODO: Optimize code by removing these lines and putting them in a function.
         timeline.stop();
         iterationButton.setText("Iteration: 0");
-        for (int i = 0; i < Options.getSize(); i++) {
-            for (int j = 0; j < Options.getSize(); j++) {
-                Pane pane = new Pane();
-                    pane.setPrefSize(10, 10); // Sets size of each cell. https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/Pane.html
-                    gridPane.add(pane, i, j);
-                    pane.setStyle("-fx-background-color: #000000"); // Purple to see if it works.
-            }
-        }
+        setCells(Options.getGrid());
     }
 
     @FXML
