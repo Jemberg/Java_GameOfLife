@@ -1,5 +1,5 @@
 # Conway's Game of Life in Java
-This is a version of John Conway's Game of Life written in Java. It was created by Martin Jemberg and Freish as a part of a finals project in Ventspils University of Applied Sciences.
+This is a version of John Conway's Game of Life written in Java. It was created by Martin Jemberg and Freish as a part of a finals project in Ventspils University of Applied Sciences. This software is open-source and free to use under the GNU General Public License, Version 3 (http://www.gnu.org/licenses/gpl.html).
 
 ## Game of Life description
 The Game of Life is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves. It is Turing complete and can simulate a universal constructor or any other Turing machine. 
@@ -27,4 +27,4 @@ The following technologies were used in the development of this project:
 * JSON
 
 ## Installation
-Simply download the latest release in the release section and enjoy! 
+Simply download the latest release in the [release section](https://github.com/MartinJemberg/Java_GameOfLife/releases) and enjoy! 
