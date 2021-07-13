@@ -1,4 +1,4 @@
-# Game of Life in Java
+# Conway's Game of Life in Java
 This is a version of John Conway's Game of Life written in Java. It was created by Martin Jemberg and Freish as a part of a finals project in Ventspils University of Applied Sciences.
 
 ## Game of Life description
