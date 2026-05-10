@@ -1,3 +1,5 @@
+Note to anyone landing on this repository: The project is not actively maintaned anymore, if you wish to maintain it or update it, please submit a pull request.
+
 # Conway's Game of Life in Java
 This is a version of John Conway's Game of Life written in Java. It was created by Mārtiņš Dāvis Jembergs and Freish as a part of a finals project in Ventspils University of Applied Sciences. This software is open-source and free to use under the GNU General Public License, Version 3 (http://www.gnu.org/licenses/gpl.html).
 
